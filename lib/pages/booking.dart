@@ -3,6 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:admin/models/bookingCard.dart';
 import 'package:admin/utils/toast.dart';
 import 'package:admin/utils/cached_image.dart';
+import 'package:admin/blocs/admin_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:admin/utils/dialog.dart';
 
 class BookingPage extends StatefulWidget {
   @override
@@ -67,6 +70,80 @@ class _BookingPageState extends State<BookingPage> {
       _lastVisible = null;
     });
     _getData();
+  }
+
+  Future handleDelete(timestamp) async {
+    final AdminBloc ab = Provider.of<AdminBloc>(context, listen: false);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            contentPadding: EdgeInsets.all(50),
+            elevation: 0,
+            children: <Widget>[
+              Text('Delete?',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900)),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Want to delete this item from the database?',
+                  style: TextStyle(
+                      color: Colors.grey[900],
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700)),
+              SizedBox(
+                height: 30,
+              ),
+              Center(
+                  child: Row(
+                    children: <Widget>[
+                      FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        color: Colors.redAccent,
+                        child: Text(
+                          'Yes',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        onPressed: () async {
+                          if (ab.userType == 'tester') {
+                            Navigator.pop(context);
+                            openDialog(context, 'You are a Tester','Only admin can delete contents');
+                          } else {
+                            await ab.deleteContent(timestamp, 'Booking')
+                                //.then((value) => ab.decreaseCount('blogs_count'))
+                                .then((value) => openToast1(context, 'Item deleted successfully!'));
+                            reloadData();
+                            Navigator.pop(context);
+                          }
+
+                        },
+                      ),
+                      SizedBox(width: 10),
+                      FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        color: Colors.deepPurpleAccent,
+                        child: Text(
+                          'No',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ))
+            ],
+          );
+        });
   }
 
   @override
@@ -207,24 +284,10 @@ class _BookingPageState extends State<BookingPage> {
                             decoration: BoxDecoration(
                                 color: Colors.grey[200],
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Icon(Icons.edit,
-                                size: 16, color: Colors.grey[800])),
-                        onTap: () {
-                          //nextScreen(context, UpdateBlog(blogData: d));
-                        },
-                      ),
-                      SizedBox(width: 10),
-                      InkWell(
-                        child: Container(
-                            height: 35,
-                            width: 45,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10)),
                             child: Icon(Icons.delete,
                                 size: 16, color: Colors.grey[800])),
                         onTap: () {
-                          //handleDelete(d.timestamp);
+                          handleDelete(d.timestamp);
                         },
                       ),
                     ],
