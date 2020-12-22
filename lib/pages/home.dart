@@ -2,6 +2,7 @@ import 'package:admin/blocs/admin_bloc.dart';
 import 'package:admin/config/config.dart';
 import 'package:admin/pages/admin.dart';
 import 'package:admin/pages/blogs.dart';
+import 'booking.dart';
 import 'package:admin/pages/data_info.dart';
 import 'package:admin/pages/featured.dart';
 import 'package:admin/pages/notifications.dart';
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     'Featured Places',
     'Upload Place',
     'Blogs',
+    'Booking',
     'Upload Blog',
     'States',
     'Notifications',
@@ -51,6 +53,7 @@ class _HomePageState extends State<HomePage> {
     LineIcons.bomb,
     LineIcons.arrow_circle_up,
     LineIcons.rocket,
+    LineIcons.hotel,
     LineIcons.arrow_circle_up,
     LineIcons.map_pin,
     LineIcons.bell,
@@ -115,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                     tab(titles[8], icons[8]),
                     tab(titles[9], icons[9]),
                     tab(titles[10], icons[10]),
+                    tab(titles[10], icons[11]),
 
 
 
@@ -129,6 +133,7 @@ class _HomePageState extends State<HomePage> {
                     CoverWidget(widget: FeaturedPlaces()),
                     CoverWidget(widget: UploadPlace()),
                     CoverWidget(widget: BlogPage()),
+                    CoverWidget(widget: BookingPage()),
                     CoverWidget(widget: UploadBlog()),
                     CoverWidget(widget: States()),
                     CoverWidget(widget: Notifications()),
