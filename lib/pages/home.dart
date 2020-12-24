@@ -20,6 +20,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vertical_tabs/vertical_tabs.dart';
+import 'tickets.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
     'Upload Place',
     'Blogs',
     'Booking',
+    'Tickets',
     'Upload Blog',
     'States',
     'Notifications',
@@ -54,6 +56,7 @@ class _HomePageState extends State<HomePage> {
     LineIcons.arrow_circle_up,
     LineIcons.rocket,
     LineIcons.hotel,
+    LineIcons.ticket,
     LineIcons.arrow_circle_up,
     LineIcons.map_pin,
     LineIcons.bell,
@@ -118,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                     tab(titles[8], icons[8]),
                     tab(titles[9], icons[9]),
                     tab(titles[10], icons[10]),
-                    tab(titles[10], icons[11]),
+                    tab(titles[11], icons[11]),
+                    tab(titles[12], icons[12]),
 
 
 
@@ -134,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                     CoverWidget(widget: UploadPlace()),
                     CoverWidget(widget: BlogPage()),
                     CoverWidget(widget: BookingPage()),
+                    CoverWidget(widget: Tickets()),
                     CoverWidget(widget: UploadBlog()),
                     CoverWidget(widget: States()),
                     CoverWidget(widget: Notifications()),
