@@ -7,9 +7,14 @@ class BookingCard{
   String depDate;
   String arrDate;
   String timestamp;
+  String clientName;
+  String clientEmail;
+  String clientPhone;
+  String clientAvatar;
 
   BookingCard({this.hotelName, this.price,
-    this.imageUrl, this.depDate, this.arrDate, this.timestamp});
+    this.imageUrl, this.depDate, this.arrDate, this.timestamp,
+  this.clientName, this.clientEmail, this.clientPhone, this.clientAvatar});
   
   factory BookingCard.fromFirestore(DocumentSnapshot snapshot){
     var d = snapshot.data();
@@ -20,6 +25,10 @@ class BookingCard{
       depDate: d['depDate'],
       arrDate: d['arrDate'],
       timestamp: d['timestamp'],
+      clientName: d['clientName'],
+      clientEmail: d['clientEmail'],
+      clientPhone: d['clientPhone'],
+      clientAvatar: d['clientAvatar'],
     );
   }
 }

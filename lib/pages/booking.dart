@@ -221,7 +221,7 @@ class _BookingPageState extends State<BookingPage> {
     return Container(
       padding: EdgeInsets.all(15),
       margin: EdgeInsets.only(top: 5, bottom: 5),
-      height: 150,
+      height: 255,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey[200]),
           borderRadius: BorderRadius.circular(10)),
@@ -275,22 +275,41 @@ class _BookingPageState extends State<BookingPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: <Widget>[
-                      InkWell(
-                        child: Container(
-                            height: 35,
-                            width: 45,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Icon(Icons.delete,
-                                size: 16, color: Colors.grey[800])),
-                        onTap: () {
-                          handleDelete(d.timestamp);
-                        },
-                      ),
-                    ],
+                  Text(
+                    "Booked by: ",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading : CircleAvatar(
+                      backgroundImage: NetworkImage(d.clientAvatar),
+                    ),
+                    title: Text(
+                      d.clientName,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    subtitle: Text('${d.clientEmail} \nphone: ${d.clientPhone}'),
+                    isThreeLine: true,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    child: Container(
+                        height: 35,
+                        width: 45,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Icon(Icons.delete,
+                            size: 16, color: Colors.grey[800])),
+                    onTap: () {
+                      handleDelete(d.timestamp);
+                    },
                   ),
                 ],
               ),
