@@ -8,9 +8,13 @@ class TicketCard{
   String price;
   String airline;
   String timestamp;
+  String clientName;
+  String clientEmail;
+  String clientPhone;
 
   TicketCard({this.origin, this.destination,
-    this.depDate, this.arrDate, this.price, this.airline, this.timestamp});
+    this.depDate, this.arrDate, this.price, this.airline, this.timestamp,
+    this.clientName, this.clientEmail, this.clientPhone});
 
   factory TicketCard.fromFirestore(DocumentSnapshot snapshot){
     var d = snapshot.data();
@@ -22,6 +26,9 @@ class TicketCard{
       price: d['price'],
       airline: d['airline'],
       timestamp: d['timestamp'],
+      clientName: d['clientName'],
+      clientEmail: d['clientEmail'],
+      clientPhone: d['clientPhone'],
     );
   }
 }

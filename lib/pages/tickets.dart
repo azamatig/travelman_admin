@@ -223,7 +223,7 @@ class _TicketsState extends State<Tickets> {
     return Container(
       padding: EdgeInsets.all(15),
       margin: EdgeInsets.only(top: 5, bottom: 5),
-      height: 245,
+      height: 365,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey[200]),
           borderRadius: BorderRadius.circular(10)),
@@ -294,6 +294,32 @@ class _TicketsState extends State<Tickets> {
                         d.price,
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                       ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Divider(
+                  color: Colors.black,
+                  height: 20,
+                  thickness: 5,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ListTile(
+                      leading : CircleAvatar(
+                        backgroundImage: NetworkImage("https://3znvnpy5ek52a26m01me9p1t-wpengine.netdna-ssl.com/wp-content/uploads/2017/07/noimage_person.png"),
+                      ),
+                      title: Text(
+                        d.clientName,
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      subtitle: Text('${d.clientEmail} \nphone: ${d.clientPhone}'),
+                      isThreeLine: true,
                     ),
                   ],
                 ),
