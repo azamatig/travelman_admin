@@ -2,6 +2,7 @@ import 'package:admin/blocs/admin_bloc.dart';
 import 'package:admin/config/config.dart';
 import 'package:admin/pages/admin.dart';
 import 'package:admin/pages/blogs.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'booking.dart';
 import 'package:admin/pages/data_info.dart';
 import 'package:admin/pages/featured.dart';
@@ -67,9 +68,9 @@ class _HomePageState extends State<HomePage> {
 
 
   Future handleLogOut ()async{
+    await FirebaseAuth.instance.signOut();
     final SharedPreferences sp = await SharedPreferences.getInstance();
     await sp.clear().then((value) => nextScreenCloseOthers(context, SignInPage()));
-
   }
 
 
